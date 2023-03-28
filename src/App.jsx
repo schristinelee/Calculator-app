@@ -1,11 +1,27 @@
 import React, { useState } from "react";
+import "./App.css";
 
 const App = () => {
   const [result, setResult] = useState("");
 
   const handleClick = (e) => {
     setResult(result.concat(e.target.name));
-    console.log(e.target.value);
+  };
+
+  const clear = () => {
+    setResult("");
+  };
+
+  const backspace = () => {
+    setResult(result.slice(0, result.length - 1));
+  };
+
+  const calculate = () => {
+    try {
+      setResult(eval(result).toString());
+    } catch (err) {
+      setResult("Error");
+    }
   };
   return (
     <>
@@ -15,56 +31,59 @@ const App = () => {
         </form>
 
         <div className="keypad">
-          <button onClick={handleClick} value={"AC"} id="clear">
+          <button className="highlight" onClick={clear} id="clear">
             AC
           </button>
-          <button onClick={handleClick} value={"C"} id="backspace">
+          <button className="highlight" onClick={backspace} id="backspace">
             C
           </button>
-          <button onClick={handleClick} value={"/"} type="button" className="btn btn-primary">
+          <button className="highlight" name="/" onClick={handleClick}>
             &divide;
           </button>
-          <button onClick={handleClick} value={"x"}>
-            &times;
-          </button>
-          <button onClick={handleClick} value={"-"}>
-            &ndash;
-          </button>
-          <button onClick={handleClick} value={"="}>
-            =
-          </button>
-          <button onClick={handleClick} value={"+"}>
-            +
-          </button>
-          <button onClick={handleClick} value={9}>
-            9
-          </button>
-          <button onClick={handleClick} value={8}>
-            8
-          </button>
-          <button onClick={handleClick} value={7}>
+          <button name="7" onClick={handleClick}>
             7
           </button>
-          <button onClick={handleClick} value={6}>
-            6
+          <button name="8" onClick={handleClick}>
+            8
           </button>
-          <button onClick={handleClick} value={5}>
-            5
+          <button name="9" onClick={handleClick}>
+            9
           </button>
-          <button onClick={handleClick} value={4}>
+          <button className="highlight" name="*" onClick={handleClick}>
+            &times;
+          </button>
+          <button name="4" onClick={handleClick}>
             4
           </button>
-          <button onClick={handleClick} value={3}>
-            3
+          <button name="5" onClick={handleClick}>
+            5
           </button>
-          <button onClick={handleClick} value={2}>
-            2
+          <button name="6" onClick={handleClick}>
+            6
           </button>
-          <button onClick={handleClick} value={1}>
+          <button className="highlight" name="-" onClick={handleClick}>
+            &ndash;
+          </button>
+          <button name="1" onClick={handleClick}>
             1
           </button>
-          <button onClick={handleClick} value={0}>
+          <button name="2" onClick={handleClick}>
+            2
+          </button>
+          <button name="3" onClick={handleClick}>
+            3
+          </button>
+          <button className="highlight" name="+" onClick={handleClick}>
+            +
+          </button>
+          <button name="0" onClick={handleClick}>
             0
+          </button>
+          <button name="." onClick={handleClick}>
+            .
+          </button>
+          <button className="highlight" onClick={calculate} id="result">
+            =
           </button>
         </div>
       </div>
